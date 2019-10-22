@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1571781949304.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1259756755",
+    "id" : "F6F3132C",
+    "lastKnownWriteTime" : 1571784941,
+    "last_content_update" : 1571787860346,
+    "path" : "~/Documents/Postdoc/Other/R Class/module 8/Module-8/module8HW.R",
+    "project_path" : "module8HW.R",
+    "properties" : {
+        "cursorPosition" : "17,0",
+        "scrollLine" : "4",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

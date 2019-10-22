@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1571686973473.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "19A324FC",
+    "lastKnownWriteTime" : 4559941884,
+    "last_content_update" : 1571686973473,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "258ABF4C",
+        "caption" : "phd_by_field",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=phd_by_field&cache_key=258ABF4C",
+        "displayedObservations" : 3370,
+        "environment" : "",
+        "expression" : "phd_by_field",
+        "object" : "phd_by_field",
+        "preview" : 0,
+        "totalObservations" : 3370,
+        "variables" : 5
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

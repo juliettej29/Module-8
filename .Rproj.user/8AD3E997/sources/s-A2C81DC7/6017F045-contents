@@ -1,0 +1,10 @@
+library(ggplot2)
+p<- cats_vs_dogs
+ggplot(p, mapping = aes(n_dog_households, n_cat_households, color=state))+
+  geom_point()+
+  scale_color_brewer(grDevices::rainbow) +
+  labs(x = "Dog Households", 
+       y = "Cat Households", 
+       title= "Number of Houses with Dogs vs Number of Houses with Dogs", 
+       colour= "State"
+  )

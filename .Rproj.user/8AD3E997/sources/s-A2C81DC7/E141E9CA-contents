@@ -1,0 +1,70 @@
+### Number 1 ###
+
+library(tidyverse)
+library(lubridate)
+
+d <- lake_mead_depth
+d%
+library(tidyverse)
+library(lubridate)
+d<- lake_mead_depth
+d %>%
+  gather(`JAN`, `FEB`, `MAR`, `APR`,`MAY`, `JUN`,`JUL`, `AUG`,`SEP`, `OCT`,`NOV`, `DEC`, key = "Month", value = "Lake Mead depth (ft)") -> f
+
+
+f%>%
+  add_column(prepost= ifelse(f$year < 1964, 'Pre Glen Canyon Dam (1936-1964)', 'Post Glen Canyon Dam (1964-2014)')) -> g
+as.numeric(g$`Lake Mead depth (ft)`)
+
+g$prepost<-factor(g$prepost, levels = c("Pre Glen Canyon Dam (1936-1964)", "Post Glen Canyon Dam (1964-2014)"))
+g$Month<- factor(g$Month, levels = c("JAN", "FEB", "MAR", "APR","MAY", "JUN","JUL", "AUG","SEP", "OCT","NOV", "DEC"))
+g$prepost<-factor(g$prepost, levels = c("Pre Glen Canyon Dam (1936-1964)", "Post Glen Canyon Dam (1964-2014)"))
+g  
+
+ggplot(g, mapping = aes(Month, `Lake Mead depth (ft)`))+
+  geom_boxplot() +
+  theme_bw()+
+  facet_grid(~prepost)
+
+####Number 2####
+
+
+w<- border_flow
+w
+w$Date<- as.Date(w$Date)
+colnames(w)[colnames(w)=="border_flow"] <- 'Border'
+w
+r <- lake_powell_flow
+
+r$Date <- paste(r$year, r$month, r$day, sep="-")
+r$Date<-as.Date(r$Date)
+colnames(r)[colnames(r)=="lakepowell_flow"] <- 'Lake Powell'
+r
+e<-lees_ferry_flow
+
+e
+e$date<- mdy(e$date)
+e
+colnames(e)[colnames(e)=="date"] <- "Date"
+colnames(e)[colnames(e)=="leesferry_flow"] <- "Lees Ferry"
+e$Date<- as.Date(e$Date)
+e
+r
+
+e
+
+e
+w %>%
+  right_join(r) %>%
+  left_join(e)-> p
+q<- p %>% 
+  gather('Border','Lake Powell', "Lees Ferry", key="name", value="Flow")
+q$name <- factor(q$name, level= c("Lake Powell", "Lees Ferry", "Border"))
+
+q%>%
+ggplot(q, mapping = aes(Date,Flow)) +
+  geom_line() +
+  theme_bw() + 
+  facet_wrap(~name, nrow =3) +
+  geom_vline(xintercept = 1964-01-01, , color = "red") +
+  labs( x = "",  y = "Flow (cfs)")

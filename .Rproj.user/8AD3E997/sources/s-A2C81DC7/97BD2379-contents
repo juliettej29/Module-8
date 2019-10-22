@@ -1,0 +1,33 @@
+# install.packages("tidyverse")
+# install.packages("GSODR")
+# install.packages("viridisLite")
+
+# Clear workspace & load packages -----------------------------------------
+rm(list=ls(all=TRUE)) # Clear workspace
+library(tidyverse)
+library(GSODR)
+library(viridisLite)
+set.seed(777)
+
+# Retrieve weather data ----------------------------------------
+raleigh <- get_GSOD(years = 1989:2019, station = "723060-13722")
+
+# Aggregate daily rainfall data by month -----------------------------------
+raleigh_monthly <- raleigh %>% group_by(YEAR, MONTH) %>% summarize(PRCP = sum(PRCP, na.rm = T)/25.4)
+
+# Visualize the rainfall data ---------------------------------------------
+# 1. Boxplot
+ggplot(data = raleigh_monthly, aes(x = MONTH, y = PRCP)) + geom_boxplot() + theme_minimal()
+
+# 2. Violin plot
+ggplot(data = raleigh_monthly, aes(x = MONTH, y = PRCP)) + geom_violin() + theme_minimal()
+
+# 3. Violin plot with jittered points
+ggplot(data = raleigh_monthly, aes(x = MONTH, y = PRCP)) + geom_violin() + geom_jitter(width = 0, alpha = 0.2, color = "red") + theme_minimal()
+
+# 4. Heatmap
+ggplot(data = raleigh_monthly, aes(x = MONTH, y = YEAR, fill = PRCP)) + geom_raster() + scale_fill_viridis_c() + theme_minimal()
+
+# 5. Heatmap with labels for Hurricanes Fran, Floyd, Matthew, and Florence
+ggplot() + geom_raster(data = raleigh_monthly, aes(x = MONTH, y = YEAR, fill = PRCP)) + scale_fill_viridis_c() + theme_minimal() + geom_text(data = data.frame(HURRICANE = c("Fran", "Floyd", "Matthew", "Florence"), YEAR = c("1996", "1999", "2016", "2018"), MONTH = c("09", "09", "10", "09")), aes(x = MONTH, y = YEAR, label = HURRICANE))
+
